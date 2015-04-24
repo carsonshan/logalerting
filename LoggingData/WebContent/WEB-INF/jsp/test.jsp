@@ -2,7 +2,7 @@
 <%@page import="java.util.List"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Demo::jQuery Smart Pagination Plugin</title>
+<title>Verizon Log Analyzer and Alerting</title>
 <META HTTP-EQUIV="refresh" CONTENT="2;url=/LoggingData">
 <style type="text/css">
 body
@@ -153,7 +153,7 @@ border: solid 1px red;
 <%
 List<LogEvent> eventList = (List<LogEvent>)session.getAttribute("eventList");
 %>
-<center><h1>Monitory Data</h1></center>
+<center><h1>Security Monitoring and Alerting System</h1></center>
 <div id="green-contents" class="contents" style="border: solid 1px #5f9000;">
 <table id="mt" cellpadding="0" cellspacing="0" border="0" class="table">
 <tr class="header">
@@ -162,6 +162,7 @@ List<LogEvent> eventList = (List<LogEvent>)session.getAttribute("eventList");
 
 <th>Logger Statement</th>
 <th>Words Matcheds</th>
+<th>Alert Time</th>
 </tr>
 <%
 for(LogEvent event:eventList)
@@ -172,6 +173,7 @@ for(LogEvent event:eventList)
 <td><%=event.getCreatedTimeStamp()%></td>
 <td><%=event.getData()%></td>
 <td><%=event.getKeyWords()%></td>
+<td><%=event.getCreatedTimeStamp()%></td>
 </tr>
 <%
 }
