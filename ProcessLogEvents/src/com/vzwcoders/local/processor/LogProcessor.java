@@ -8,11 +8,15 @@ import javax.jms.JMSException;
 import com.vzwcoders.localq.LocalReceiver;
 import com.vzwcoders.localq.LocalSender;
 import com.vzwcoders.mq.MsgSender;
+import com.vzwcoders.signal.SignalListener;
 import com.vzwcoders.util.FileUtil;
 
 public class LogProcessor{
 	public static Set<String> keywords=new HashSet<String>();
 	static{
+		init();
+	}
+	public static void init() {
 		keywords.addAll(FileUtil.loadProps("c:\\prop.txt"));
 		System.out.println("KeyWords "+keywords);
 	}
@@ -31,6 +35,9 @@ public class LogProcessor{
 			LocalReceiver lr=new LocalReceiver();
 			lr.init();
 			lr.receiveMessage();
+			
+			//refresh signal listener
+			new SignalListener().start();
 		} catch (JMSException e) {
 			e.printStackTrace();
 		}
