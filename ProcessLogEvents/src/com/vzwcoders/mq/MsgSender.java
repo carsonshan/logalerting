@@ -26,7 +26,7 @@ public class MsgSender {
 	private MessageProducer producer = null;
 	private  Random r=new Random();
 	private long counter;
-
+	TextMessage message;
 	public MsgSender() {
 
 	}
@@ -34,10 +34,9 @@ public class MsgSender {
 	public void sendMessage(String msg) {
 
 		try {
-			TextMessage message = session.createTextMessage();
 			message.setText(msg);
 			producer.send(message);
-			System.out.println("Sent: " + message.getText());
+			//System.out.println("Sent: " + message.getText());
 		} catch (JMSException e) {
 			e.printStackTrace();
 		}
@@ -45,6 +44,7 @@ public class MsgSender {
 	}
 
 	public void init() throws JMSException {
+		System.out.println("Initilize JMS Queue");
 		factory = new ActiveMQConnectionFactory(
 
 		ActiveMQConnection.DEFAULT_BROKER_URL);
@@ -58,6 +58,7 @@ public class MsgSender {
 		destination = session.createQueue("logeventq");
 
 		producer = session.createProducer(destination);
+		message = session.createTextMessage();
 	}
 
 	public static void main(String[] args) throws Exception {

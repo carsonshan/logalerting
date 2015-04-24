@@ -3,6 +3,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
 import com.vzwcoders.local.processor.LogProcessor;
+import com.vzwcoders.localq.LocalSender;
 
 public class SignalListener extends Thread {
   public void run() {
@@ -13,7 +14,7 @@ public class SignalListener extends Thread {
     	DatagramPacket dgp = new DatagramPacket(buf, buf.length);
     	LogProcessor l=new LogProcessor();
 		 sk = new DatagramSocket(PORT);
-		System.out.println("Server started");
+		System.out.println("Listing for refresh command");
 		while (true) {
 		  sk.receive(dgp);
 		  String rcvd = new String(dgp.getData(), 0, dgp.getLength()) + ", from address: "

@@ -13,13 +13,13 @@ public class LogData {
 		while(true)
 		{
 		obj.runMe(msgs[(r.nextInt(18)%18)]+"-msgid");
-		Thread.sleep(2000);
+		Thread.sleep(100);
 		}
  
 	}
  
 	private void runMe(String parameter){
-		logger.debug( parameter);
+		logger.info( parameter);
 	}
 
 	public static String msgs []={"Beauty is not in the face; beauty is a light in the heart. ~Khalil Gibran",

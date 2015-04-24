@@ -9,12 +9,14 @@ import java.util.concurrent.BlockingQueue;
 
 import javax.jms.JMSException;
 
+import com.vzwcoders.local.processor.LogProcessor;
+
 public class LocalSender extends Thread {
 
 	public static BlockingQueue<String> bq=new ArrayBlockingQueue<String>(1000);
 	private  Random r=new Random();
 	private long counter;
-	private static int WAIT_TIME=1000;
+	private static int WAIT_TIME=100;
 	private String fileName;
 	public LocalSender(String fileName) {
 		this.fileName=fileName;
@@ -23,10 +25,11 @@ public class LocalSender extends Thread {
 	public void sendMessage(String msg) {
 			try {
 				bq.put(msg);
+				LogProcessor.TOT_MSG_COUNT++;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			System.out.println("Sent: " + msg);
+			//System.out.println("Sent: " + msg);
 	}
 
 	public void init() throws JMSException {
@@ -43,6 +46,7 @@ public class LocalSender extends Thread {
 				String msg=br.readLine();
 				if(msg==null || msg.length()==0)Thread.sleep(WAIT_TIME);
 				else sender.sendMessage(msg);
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 				Thread.sleep(WAIT_TIME);
@@ -53,12 +57,14 @@ public class LocalSender extends Thread {
 	
 	public  void run()  {
 		try {
+			System.out.println("Started Sender");
 			BufferedReader br=new BufferedReader(new FileReader(new File(fileName)));
 			while(true){
 				try {
 					String msg=br.readLine();
 					if(msg==null || msg.length()==0)Thread.sleep(WAIT_TIME);
 					else sendMessage(msg);
+					//Thread.sleep(WAIT_TIME);
 				} catch (Exception e) {
 					e.printStackTrace();
 					Thread.sleep(WAIT_TIME);

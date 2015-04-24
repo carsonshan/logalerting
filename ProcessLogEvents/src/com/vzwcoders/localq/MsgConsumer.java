@@ -18,7 +18,7 @@ import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import com.vzwcoders.dao.EventDAO;
-import com.vzwcoders.processor.LogProcessor;
+import com.vzwcoders.util.StatsRunner;
 import com.vzwcoders.vo.LogEvent;
 
 public class MsgConsumer {
@@ -29,7 +29,8 @@ public class MsgConsumer {
 	private Destination destination = null;
 	private MessageConsumer consumer = null;
 	private int count=0;
-	
+	public static long CONSUMER_RECEIVE_MSG_COUNT;
+	public static long MSG_INSERT_COUNT;
 	public MsgConsumer() {
 
 	}
@@ -39,8 +40,9 @@ public class MsgConsumer {
 		try {
 			int count=0;
 			while (true) {
-				System.out.println("Waiting for message");
+				//System.out.println("Waiting for message");
 				Message message = consumer.receive();
+				MsgConsumer.CONSUMER_RECEIVE_MSG_COUNT++;
 				if (message instanceof TextMessage) {
 					TextMessage text = (TextMessage) message;
 					String m=text.getText();
@@ -50,7 +52,6 @@ public class MsgConsumer {
 							System.out.println("Message format is not proper "+m);
 							continue;
 						}
-					Set<String> matchs=new HashSet<String>();
 					new EventDAO().insertEventLog(new LogEvent(count++,k[0] ,k[1], new Timestamp(new Date().getTime())));
 						System.out.println("inserted in to db");
 				}
@@ -69,11 +70,14 @@ public class MsgConsumer {
 		session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 		destination = session.createQueue("logeventq");
 		consumer = session.createConsumer(destination);
+		EventDAO.init();
 	}
 
 	public static void main(String[] args) throws Exception {
 		MsgConsumer receiver = new MsgConsumer();
 		receiver.init();
+		new StatsRunner().start();
 		receiver.receiveMessage();
+		
 	}
 }

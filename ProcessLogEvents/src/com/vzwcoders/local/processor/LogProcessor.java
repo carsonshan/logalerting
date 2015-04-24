@@ -10,13 +10,17 @@ import com.vzwcoders.localq.LocalSender;
 import com.vzwcoders.mq.MsgSender;
 import com.vzwcoders.signal.SignalListener;
 import com.vzwcoders.util.FileUtil;
+import com.vzwcoders.util.LogStatsRunner;
 
-public class LogProcessor{
+public class LogProcessor extends Thread{
 	public static Set<String> keywords=new HashSet<String>();
+	public static long MSG_COUNT_TO_Q;
+	public static long TOT_MSG_COUNT;
 	static{
 		init();
 	}
 	public static void init() {
+		keywords.clear();
 		keywords.addAll(FileUtil.loadProps("c:\\prop.txt"));
 		System.out.println("KeyWords "+keywords);
 	}
@@ -29,15 +33,14 @@ public class LogProcessor{
 	public  void run()  {
 		try {
 			LocalSender ls=new LocalSender(System.getProperty("fileName"));
-			ls.init();
 			ls.start();
 			LogProcessor.s.init();
+			System.out.println("Starting Receiver ...");
 			LocalReceiver lr=new LocalReceiver();
-			lr.init();
-			lr.receiveMessage();
-			
+			lr.start();
 			//refresh signal listener
 			new SignalListener().start();
+			new LogStatsRunner().start();
 		} catch (JMSException e) {
 			e.printStackTrace();
 		}
