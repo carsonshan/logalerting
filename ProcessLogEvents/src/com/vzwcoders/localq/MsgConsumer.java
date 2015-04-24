@@ -44,7 +44,12 @@ public class MsgConsumer {
 				if (message instanceof TextMessage) {
 					TextMessage text = (TextMessage) message;
 					String m=text.getText();
-					String k[]=m.split("#KEY#");
+					if(m==null || m.length()==0) continue;
+						String k[]=m.split("#KEY#");
+						if(k!=null && k.length!=2){
+							System.out.println("Message format is not proper "+m);
+							continue;
+						}
 					Set<String> matchs=new HashSet<String>();
 					new EventDAO().insertEventLog(new LogEvent(count++,k[0] ,k[1], new Timestamp(new Date().getTime())));
 						System.out.println("inserted in to db");

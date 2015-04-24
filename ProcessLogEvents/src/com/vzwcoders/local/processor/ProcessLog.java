@@ -21,10 +21,10 @@ public void run(){
 			if(msg.indexOf(key)>-1)
 				matchs.add(key);
 		}
-		//if(matchs.size()>0){
-		//System.out.println("Postig the message in AQ");
+		if(matchs.size()>0){
+		System.out.println("Postig the message in AQ");
 		LogProcessor.s.sendMessage(msg+"#KEY#"+matchs);
-		//}
+		}
 	}
 }
 }

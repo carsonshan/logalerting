@@ -8,16 +8,18 @@ import javax.jms.JMSException;
 import com.vzwcoders.localq.LocalReceiver;
 import com.vzwcoders.localq.LocalSender;
 import com.vzwcoders.mq.MsgSender;
+import com.vzwcoders.util.FileUtil;
 
 public class LogProcessor{
 	public static Set<String> keywords=new HashSet<String>();
 	static{
-		keywords.add("beautiful");
-		keywords.add("kindness");
+		keywords.addAll(FileUtil.loadProps("c:\\prop.txt"));
+		System.out.println("KeyWords "+keywords);
 	}
 	public static MsgSender s=new MsgSender();
 	public static void main(String[] args) throws Exception{
-		//srun(args);
+		LogProcessor l=new LogProcessor();
+		l.run();
 		
 	}
 	public  void run()  {
