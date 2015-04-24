@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/lib/mq_lib/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/lib/mq_lib/activemq-console-5.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/lib/mq_lib/activemq-core-5.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/lib/mq_lib/activemq-core-5.1.0-tests.jar"/>
+	<classpathentry kind="lib" path="C:/lib/mq_lib/activemq-jaas-5.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/lib/mq_lib/activemq-web-5.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/lib/mq_lib/camel-core-1.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/lib/mq_lib/camel-jms-1.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/lib/mq_lib/camel-spring-1.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/lib/mq_lib/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/lib/mq_lib/geronimo-j2ee-management_1.0_spec-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/lib/mq_lib/geronimo-jms_1.1_spec-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/lib/mq_lib/geronimo-jta_1.0.1B_spec-1.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/lib/mq_lib/jaxb-api-2.0.jar"/>
+	<classpathentry kind="lib" path="C:/lib/mq_lib/jaxb-impl-2.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/lib/mq_lib/stax-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/lib/mq_lib/stax-api-1.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_45"/>
+	<classpathentry kind="lib" path="C:/lib/mongo-java-driver-2.12.1.jar"/>
+	<classpathentry kind="lib" path="C:/Softwares/google-gson-2.2.4-release/google-gson-2.2.4/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="C:/lib/spring3.1.2/spring-asm-3.1.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/lib/spring3.1.2/spring-beans-3.1.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/lib/spring3.1.2/spring-context-3.1.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/lib/spring3.1.2/spring-context-support-3.1.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/lib/spring3.1.2/spring-core-3.1.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/lib/spring3.1.2/spring-expression-3.1.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/lib/spring3.1.2/spring-tx-3.1.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/lib/apache/org-apache-commons-logging.jar"/>
+	<classpathentry kind="lib" path="C:/lib/quartz/quartz-1.8.6.jar"/>
+	<classpathentry kind="lib" path="C:/lib/log4j/slf4j-1.7.12/slf4j-1.7.12/slf4j-api-1.7.12.jar"/>
+	<classpathentry kind="lib" path="config"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
