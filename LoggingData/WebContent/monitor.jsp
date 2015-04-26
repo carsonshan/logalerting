@@ -25,7 +25,7 @@ System.out.println("Bean object is "+v);
 <br/>Process is Running Succesfully
 <% }%>
 </td></tr>
-<tr><td colspan=2>Log Processor Status</td><tr>
+<tr><td >Start Time :<%if(v!=null)out.print(v.getStartTime()); %></td><td >Current Time :<%=new Date() %></td><tr>
 <tr><th>Log Message Count</th><th>Message count posted on Queue</th></tr>
 <%if(v!=null){%>
 <tr><td><%=v.getMsgCount() %></td><td><%=v.getqCount() %></td><tr>
@@ -43,7 +43,7 @@ System.out.println("MsgConsumerVO Bean object is "+m);
 <img width="100" height="100" alt="Process Stopped or Not Running" src="<%=path%>/images/Running.jpg"/>
 <br/>Queue Consumer Process is Running Succesfully
 <% }%></td></tr>
-<tr><td colspan=2>Queue Processor Status</td><tr>
+<tr><td >Start Time :<%if(m!=null)out.print(m.getStartTime()); %></td><td >Current Time :<%=new Date() %></td><tr>
 <tr><th>Messages From Queue</th><th>Inserted in DB</th></tr>
 <%if(m!=null){%>
 <tr><td><%=m.getMsgReceiveCount() %></td><td><%=m.getDbInsertCount() %></td><tr>
