@@ -15,8 +15,9 @@ import com.vzwcoders.util.LogStatsRunner;
 
 public class LogProcessor extends Thread{
 	public static Set<String> keywords=new HashSet<String>();
+	public static int LINES_READ_FROM_FILE;
 	public static long MSG_COUNT_TO_Q;
-	public static long TOT_MSG_COUNT;
+	public static int TOT_MSG_COUNT;
 	static{
 		init();
 	}
@@ -33,8 +34,14 @@ public class LogProcessor extends Thread{
 	}
 	public  void run()  {
 		try {
+			String fileName=System.getProperty("fileName");
+			if(fileName==null || fileName.length()==0){
+				System.out.println("Please provide File name in commandline argument!!!!");
+				System.exit(0);
+			}
+			System.out.println("Log Processor is starting Version X0007");
 			JMXUtil.init();
-			LocalSender ls=new LocalSender(System.getProperty("fileName"));
+			LocalSender ls=new LocalSender(fileName);
 			ls.start();
 			LogProcessor.s.init();
 			System.out.println("Starting Receiver ...");

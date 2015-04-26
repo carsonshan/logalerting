@@ -11,6 +11,7 @@ import javax.jms.JMSException;
 
 import com.vzwcoders.jmx.JMXUtil;
 import com.vzwcoders.local.processor.LogProcessor;
+import com.vzwcoders.util.FileUtil;
 
 public class LocalSender extends Thread {
 
@@ -27,6 +28,7 @@ public class LocalSender extends Thread {
 			try {
 				bq.put(msg);
 				LogProcessor.TOT_MSG_COUNT++;
+				LogProcessor.LINES_READ_FROM_FILE++;
 				JMXUtil.logStatsmbean.incrMessageCount(1);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -41,6 +43,7 @@ public class LocalSender extends Thread {
 	public static void main(String[] args) throws Exception {
 		String c=args[0];
 		BufferedReader br=new BufferedReader(new FileReader(new File(c)));
+		
 		LocalSender sender = new LocalSender(c);
 		sender.init();
 		while(true){
@@ -61,6 +64,16 @@ public class LocalSender extends Thread {
 		try {
 			System.out.println("Started Sender");
 			BufferedReader br=new BufferedReader(new FileReader(new File(fileName)));
+			System.out.println("Skipping lines....");
+			int noLines=FileUtil.fileRead(fileName);
+			LogProcessor.LINES_READ_FROM_FILE=noLines;
+			System.out.println("Skipped lines "+noLines);
+			try {
+				for(int i=0;i<noLines;i++)br.readLine();
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("Error while skipping lines");
+			}
 			while(true){
 				try {
 					String msg=br.readLine();

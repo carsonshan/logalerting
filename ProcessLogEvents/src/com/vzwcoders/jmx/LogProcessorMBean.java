@@ -5,4 +5,5 @@ public interface LogProcessorMBean {
 	public void incrQCount(int size);
 	public int getMessageCount();
 	public int getQCount();
+	public String getStartTime();
 }

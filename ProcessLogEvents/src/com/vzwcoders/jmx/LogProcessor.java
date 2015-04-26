@@ -6,6 +6,7 @@ public class LogProcessor
 	extends NotificationBroadcasterSupport implements LogProcessorMBean {
     private int messageCount = 1;
     private int qCount = 1;
+    public String startTime;
 	@Override
 	public int getMessageCount() {
 		return messageCount;
@@ -24,6 +25,11 @@ public class LogProcessor
 	@Override
 	public void incrQCount(int size) {
 		qCount+=size;
+	}
+
+	@Override
+	public String getStartTime() {
+		return startTime;
 	}
 
 	
