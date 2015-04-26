@@ -41,6 +41,7 @@ public class StatsClient {
 			v.setMsgCount(mbeanProxy.getMessageCount());
 			v.setqCount(mbeanProxy.getQCount());
 			v.setStatus("Running");
+			v.setStartTime(mbeanProxy.getStartTime());
 		} catch (Exception e) {
 			e.printStackTrace();
 			StatsClient.close();

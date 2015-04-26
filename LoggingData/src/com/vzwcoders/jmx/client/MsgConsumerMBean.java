@@ -5,4 +5,5 @@ public interface MsgConsumerMBean {
 	public void incrDBInsertCount(int size);
 	public int getReceiveMessageCount();
 	public int getDBInsertCount();
+	public String getStartTime();
 }

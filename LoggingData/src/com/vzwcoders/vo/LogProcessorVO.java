@@ -7,6 +7,13 @@ public class LogProcessorVO {
 				+ ", qCount=" + qCount + "]";
 	}
 	public String status;
+	public String startTime;
+	public String getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
 	public int msgCount;
 	public int qCount;
 	public String getStatus() {

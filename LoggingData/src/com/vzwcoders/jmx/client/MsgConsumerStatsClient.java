@@ -41,6 +41,7 @@ public class MsgConsumerStatsClient {
 			v.setMsgReceiveCount(mbeanProxy.getReceiveMessageCount());
 			v.setDbInsertCount(mbeanProxy.getDBInsertCount());
 			v.setStatus("Running");
+			v.setStartTime(mbeanProxy.getStartTime());
 		} catch (Exception e) {
 			e.printStackTrace();
 			MsgConsumerStatsClient.close();
@@ -52,7 +53,7 @@ public class MsgConsumerStatsClient {
 
 	public static  MsgConsumerMBean getProxyBean()
 			throws MalformedObjectNameException {
-        ObjectName mbeanName = new ObjectName("com.vzwcoders.jmx:type=MsgConsumerMBean");
+        ObjectName mbeanName = new ObjectName("com.vzwcoders.jmx:type=MsgConsumer");
         MsgConsumerMBean mbeanProxy =
             JMX.newMBeanProxy(mbsc, mbeanName, MsgConsumerMBean.class, true);
 		return mbeanProxy;
