@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.jms.JMSException;
 
+import com.vzwcoders.jmx.JMXUtil;
 import com.vzwcoders.local.processor.LogProcessor;
 
 public class LocalReceiver   extends Thread{
@@ -52,6 +53,11 @@ public class LocalReceiver   extends Thread{
 			}
 			if (matchs.size() > 0) {
 				LogProcessor.MSG_COUNT_TO_Q++;
+				try {
+					JMXUtil.logStatsmbean.incrQCount(1);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				//System.out.println("Messages posted to queue ");
 				LogProcessor.s.sendMessage(msg + "#KEY#" + matchs);
 			}

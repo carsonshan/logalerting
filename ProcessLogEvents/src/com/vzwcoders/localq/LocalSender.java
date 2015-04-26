@@ -9,6 +9,7 @@ import java.util.concurrent.BlockingQueue;
 
 import javax.jms.JMSException;
 
+import com.vzwcoders.jmx.JMXUtil;
 import com.vzwcoders.local.processor.LogProcessor;
 
 public class LocalSender extends Thread {
@@ -26,7 +27,8 @@ public class LocalSender extends Thread {
 			try {
 				bq.put(msg);
 				LogProcessor.TOT_MSG_COUNT++;
-			} catch (InterruptedException e) {
+				JMXUtil.logStatsmbean.incrMessageCount(1);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			//System.out.println("Sent: " + msg);

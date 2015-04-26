@@ -3,7 +3,6 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
 import com.vzwcoders.local.processor.LogProcessor;
-import com.vzwcoders.localq.LocalSender;
 
 public class SignalListener extends Thread {
   public void run() {

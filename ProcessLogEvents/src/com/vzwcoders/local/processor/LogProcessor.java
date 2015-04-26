@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.jms.JMSException;
 
+import com.vzwcoders.jmx.JMXUtil;
 import com.vzwcoders.localq.LocalReceiver;
 import com.vzwcoders.localq.LocalSender;
 import com.vzwcoders.mq.MsgSender;
@@ -32,6 +33,7 @@ public class LogProcessor extends Thread{
 	}
 	public  void run()  {
 		try {
+			JMXUtil.init();
 			LocalSender ls=new LocalSender(System.getProperty("fileName"));
 			ls.start();
 			LogProcessor.s.init();
@@ -44,5 +46,8 @@ public class LogProcessor extends Thread{
 		} catch (JMSException e) {
 			e.printStackTrace();
 		}
+	}
+	public void initJMX(){
+		
 	}
 }

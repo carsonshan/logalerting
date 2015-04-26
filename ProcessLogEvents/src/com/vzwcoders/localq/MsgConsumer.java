@@ -18,6 +18,7 @@ import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import com.vzwcoders.dao.EventDAO;
+import com.vzwcoders.jmx.JMXUtil;
 import com.vzwcoders.util.StatsRunner;
 import com.vzwcoders.vo.LogEvent;
 
@@ -43,6 +44,12 @@ public class MsgConsumer {
 				//System.out.println("Waiting for message");
 				Message message = consumer.receive();
 				MsgConsumer.CONSUMER_RECEIVE_MSG_COUNT++;
+				try {
+					JMXUtil.msgConsumerStatsmbean.incrReceiveMessageCount(1);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+					System.out.println("Error while incrementing msg count");
+				}
 				if (message instanceof TextMessage) {
 					TextMessage text = (TextMessage) message;
 					String m=text.getText();
@@ -54,6 +61,12 @@ public class MsgConsumer {
 						}
 					new EventDAO().insertEventLog(new LogEvent(count++,k[0] ,k[1], new Timestamp(new Date().getTime())));
 						System.out.println("inserted in to db");
+						try {
+							JMXUtil.msgConsumerStatsmbean.incrDBInsertCount(1);
+						} catch (Exception e) {
+							e.printStackTrace();
+							System.out.println("Error while incrementing db count");
+						}
 				}
 			}
 
@@ -75,6 +88,7 @@ public class MsgConsumer {
 
 	public static void main(String[] args) throws Exception {
 		MsgConsumer receiver = new MsgConsumer();
+		JMXUtil.initMsgConsumer();
 		receiver.init();
 		new StatsRunner().start();
 		receiver.receiveMessage();
