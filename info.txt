@@ -1,1 +1,13 @@
 -Dcom.sun.management.jmxremote.port=9999    -Dcom.sun.management.jmxremote.authenticate=false     -Dcom.sun.management.jmxremote.ssl=false
+
+start mq
+c:\apach1e-activemq-5.1.0-bin\apache-activemq-5.1.0\bin\activemq.bat
+
+mongo
+c:\mongodb\bin\mongod.exe --dbpath C:\test\mongodb\data
+
+shell
+c:\mongodb\bin\mongo.exe
+db.LogEvent.remove({})
+db.LogEvent.find().count();
+

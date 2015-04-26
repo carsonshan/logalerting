@@ -10,51 +10,51 @@ import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 
-import com.vzwcoders.vo.LogProcessorVO;
+import com.vzwcoders.vo.MsgConsumerVO;
 
-public class StatsClient {
+public class MsgConsumerStatsClient {
 	 private static MBeanServerConnection mbsc;
 	 private static JMXServiceURL url;
 	 private static JMXConnector jmxc;
      public static void main(String[] args) throws Exception {
-    	StatsClient s=new StatsClient();
+    	MsgConsumerStatsClient s=new MsgConsumerStatsClient();
         s.getBeanData();
     }
      public static void init(){
     	 try {
-    		 echo("Getting connection");
+    		 echo(" MsgConsumerStatsClient Getting connection");
 			getConnection();
-			echo("JMX Client successfully connected");
+			echo("MsgConsumerStatsClient JMX Client successfully connected");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			StatsClient.close();
+			MsgConsumerStatsClient.close();
 		}
      }
-	public static  LogProcessorVO getBeanData() throws MalformedObjectNameException {
+	public static  MsgConsumerVO getBeanData() throws MalformedObjectNameException {
 		if(jmxc==null) return null;
-		echo("Getting bean");
-		LogProcessorVO v=null;
+		echo("MsgConsumerStatsClient Getting bean");
+		MsgConsumerVO v=null;
 		try {
-			LogProcessorMBean mbeanProxy = getProxyBean();
-			v = new LogProcessorVO();
-			v.setMsgCount(mbeanProxy.getMessageCount());
-			v.setqCount(mbeanProxy.getQCount());
+			MsgConsumerMBean mbeanProxy = getProxyBean();
+			v = new MsgConsumerVO();
+			v.setMsgReceiveCount(mbeanProxy.getReceiveMessageCount());
+			v.setDbInsertCount(mbeanProxy.getDBInsertCount());
 			v.setStatus("Running");
 		} catch (Exception e) {
 			e.printStackTrace();
-			StatsClient.close();
+			MsgConsumerStatsClient.close();
 			v=null;
 		}
        
         return v;
 	}
 
-	public static  LogProcessorMBean getProxyBean()
+	public static  MsgConsumerMBean getProxyBean()
 			throws MalformedObjectNameException {
-        ObjectName mbeanName = new ObjectName("com.vzwcoders.jmx:type=LogProcessor");
-        LogProcessorMBean mbeanProxy =
-            JMX.newMBeanProxy(mbsc, mbeanName, LogProcessorMBean.class, true);
+        ObjectName mbeanName = new ObjectName("com.vzwcoders.jmx:type=MsgConsumerMBean");
+        MsgConsumerMBean mbeanProxy =
+            JMX.newMBeanProxy(mbsc, mbeanName, MsgConsumerMBean.class, true);
 		return mbeanProxy;
 	}
 
@@ -72,10 +72,10 @@ public class StatsClient {
 
     public static void  getConnection() throws Exception{
     	if(url==null){
-    		echo("Getting service url");
-        url =       new JMXServiceURL("service:jmx:rmi:///jndi/rmi://113.128.162.72:9999/jmxrmi");
+    		echo("MsgConsumerMBean Getting service url");
+        url =       new JMXServiceURL("service:jmx:rmi:///jndi/rmi://113.128.162.72:9998/jmxrmi");
          jmxc = JMXConnectorFactory.connect(url, null);
-        echo("\nGet an MBeanServerConnection");
+        echo("\nMsgConsumerMBean Get an MBeanServerConnection");
          mbsc = jmxc.getMBeanServerConnection();
     	}
     }
