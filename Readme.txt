@@ -9,5 +9,6 @@ Below are the features of this project :
 7. Web UI to monitor the alerts
 8. Different alerts such as Email,SMS or posting to Twitter/Crowaround
 
-
+TODOs
 9.Spring Batch to Start,Stop,Pause and resume is implemented
+10. Batching and Compression of messages
