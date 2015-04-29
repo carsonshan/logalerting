@@ -13,7 +13,7 @@ public class EventDAO {
 	public static DBCollection table;
 	public boolean insertEventLog(LogEvent logEvent)
 	{
-		System.out.println("Inserting "+logEvent);
+		//System.out.println("Inserting "+logEvent);
 		BasicDBObject obj = (BasicDBObject)JSON.parse(gson.toJson(logEvent));
 		table.insert(obj);
 		return true;

@@ -39,7 +39,7 @@ public class LogProcessor extends Thread{
 				System.out.println("Please provide File name in commandline argument!!!!");
 				System.exit(0);
 			}
-			System.out.println("Log Processor is starting Version X0007");
+			System.out.println("Log Processor is starting Version X0009");
 			JMXUtil.init();
 			LocalSender ls=new LocalSender(fileName);
 			ls.start();

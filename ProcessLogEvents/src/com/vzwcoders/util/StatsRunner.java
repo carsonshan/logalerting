@@ -6,7 +6,7 @@ public class StatsRunner extends Thread {
     try {
    	System.out.println("Listing for refresh command");
 		while (true) {
-			Thread.sleep(10000);
+			Thread.sleep(30000);
 			System.out.println("Status :\n Message Recived from Queue "+MsgConsumer.CONSUMER_RECEIVE_MSG_COUNT);
 			System.out.println("Status :\n Message Recived inserted to DB "+MsgConsumer.MSG_INSERT_COUNT);
 		}

@@ -2,8 +2,6 @@ package com.vzwcoders.localq;
 
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -60,8 +58,9 @@ public class MsgConsumer {
 							continue;
 						}
 					new EventDAO().insertEventLog(new LogEvent(count++,k[0] ,k[1], new Timestamp(new Date().getTime())));
-						System.out.println("inserted in to db");
+						//System.out.println("inserted in to db");
 						try {
+							MsgConsumer.MSG_INSERT_COUNT++;
 							JMXUtil.msgConsumerStatsmbean.incrDBInsertCount(1);
 						} catch (Exception e) {
 							e.printStackTrace();

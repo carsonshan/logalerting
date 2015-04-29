@@ -13,7 +13,7 @@ public class LogData {
 		while(true)
 		{
 		obj.runMe(msgs[(r.nextInt(18)%18)]+"-msgid");
-		Thread.sleep(100);
+		Thread.sleep(50);
 		}
  
 	}
